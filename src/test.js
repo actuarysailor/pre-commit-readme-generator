@@ -4,6 +4,11 @@ const path = require('path');
 const crypto = require('crypto');
 const { execSync } = require('child_process');
 
+// Accept config, readme, and template as arguments, with sensible defaults
+const configFile = process.argv[2] || 'config/readme-config.json';
+const readmeFile = process.argv[3] || 'README.md';
+const templateFile = process.argv[4] || 'templates/default.hbs';
+
 function getFileHash(filePath) {
   if (!fs.existsSync(filePath)) {
     return null;
@@ -15,10 +20,10 @@ function getFileHash(filePath) {
 function testReadmeGenerator() {
   console.log('🧪 Testing README generator...');
 
-  // Look for README.md and config in the current working directory (the repo using this hook)
-  const readmePath = path.resolve(process.cwd(), 'README.md');
-  const configPath = path.resolve(process.cwd(), 'config', 'readme-config.json');
-  const templatePath = path.resolve(process.cwd(), 'templates', 'default.hbs');
+  // Look for files in the current working directory (the repo using this hook)
+  const readmePath = path.resolve(process.cwd(), readmeFile);
+  const configPath = path.resolve(process.cwd(), configFile);
+  const templatePath = path.resolve(process.cwd(), templateFile);
 
   // Check if required files exist
   if (!fs.existsSync(configPath)) {
