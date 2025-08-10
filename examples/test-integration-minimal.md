@@ -75,11 +75,11 @@ See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-
+    
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-
+    
     <li><a href="docs/FAQ.md">FAQ</a></li>
   </ol>
 </details>
@@ -90,7 +90,10 @@ See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -118,6 +121,8 @@ or services._
 
 ## Usage
 
+
+
 _For more examples, please refer to the [Documentation](https://example.com)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -139,7 +144,6 @@ create a pull request. You can also simply open an issue with the tag
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
