@@ -93,6 +93,16 @@ function generateReadme(configPath, outputPath = 'README.md', templatePath = 'BL
     // Write output
     fs.writeFileSync(fullOutputPath, cleanReadme);
 
+    // Run markdownlint --fix on the generated file
+    try {
+      const { execSync } = require('child_process');
+      const lintCmd = `npx markdownlint-cli2 fix "${fullOutputPath}" --config .markdownlint.json`;
+      execSync(lintCmd, { stdio: 'inherit', cwd: rootDir });
+      console.log(`🧹 Ran markdownlint --fix on: ${outputPath}`);
+    } catch (lintError) {
+      console.warn('⚠️  markdownlint --fix failed or is not installed. Skipping linting.');
+    }
+
     console.log(`✅ README generated successfully: ${outputPath}`);
     console.log(`📄 Used config: ${configPath}`);
     console.log(`📋 Used template: ${templatePath}`);
