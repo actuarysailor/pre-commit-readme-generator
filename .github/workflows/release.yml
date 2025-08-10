@@ -14,6 +14,7 @@ permissions:
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    environment: release
     steps:
       - uses: googleapis/release-please-action@v4.2.0
         id: release
@@ -41,8 +42,8 @@ jobs:
       - run: npm test
         if: ${{ steps.release.outputs.release_created }}
 
-      # Optional: Publish to npm registry when a release is created
-      # - run: npm publish
-      #   if: ${{ steps.release.outputs.release_created }}
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # Publish to npm registry when a release is created
+      - run: npm publish
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
