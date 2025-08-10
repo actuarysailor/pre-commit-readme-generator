@@ -1,0 +1,17 @@
+- id: readme-generator-test
+  name: README Generator Test
+  description: Validates that README.md matches generated output from template
+  entry: node src/test.js
+  language: system
+  files: '^(.*README\.md|configs/.*\.json|.*\.hbs|BLANK_README\.md)$'
+  require_serial: true
+  pass_filenames: false
+
+- id: readme-generator-update
+  name: README Generator Update
+  description: Updates README.md from template configuration
+  entry: node src/generator.js
+  language: system
+  files: '^(configs/.*\.json|.*\.hbs|BLANK_README\.md)$'
+  require_serial: true
+  pass_filenames: false

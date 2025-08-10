@@ -1,0 +1,166 @@
+{
+  "project": {
+    "title": "Data Science Toolkit",
+    "description": "A Python library for streamlined data analysis, machine learning, and visualization workflows.",
+    "logo_path": "assets/logo.png",
+    "screenshot_path": "assets/demo.gif"
+  },
+  "repository": {
+    "github_username": "datascience-team",
+    "repo_name": "ds-toolkit",
+    "license": "BSD 3-Clause License",
+    "license_file": "LICENSE"
+  },
+  "contact": {
+    "name": "Dr. Jane Smith",
+    "email": "jane.smith@university.edu",
+    "socials": [
+      {
+        "platform": "LinkedIn",
+        "username": "dr-jane-smith",
+        "url": "https://linkedin.com/in/dr-jane-smith",
+        "icon": "💼",
+        "enabled": true
+      },
+      {
+        "platform": "ResearchGate",
+        "username": "Jane-Smith-42",
+        "url": "https://researchgate.net/profile/Jane-Smith-42",
+        "icon": "🔬",
+        "enabled": true
+      }
+    ]
+  },
+  "badges": {
+    "contributors": true,
+    "forks": true,
+    "stars": true,
+    "issues": true,
+    "license": true
+  },
+  "sections": {
+    "about": {
+      "enabled": true,
+      "content": "The Data Science Toolkit streamlines common data science workflows by providing a unified interface for data preprocessing, model training, and results visualization. Designed for both research and production environments."
+    },
+    "built_with": {
+      "enabled": true,
+      "frameworks": [
+        {
+          "name": "Python",
+          "badge": "https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white",
+          "url": "https://python.org/"
+        },
+        {
+          "name": "Pandas",
+          "badge": "https://img.shields.io/badge/pandas-150458.svg?style=for-the-badge&logo=pandas&logoColor=white",
+          "url": "https://pandas.pydata.org/"
+        },
+        {
+          "name": "Scikit-learn",
+          "badge": "https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white",
+          "url": "https://scikit-learn.org/"
+        },
+        {
+          "name": "Matplotlib",
+          "badge": "https://img.shields.io/badge/Matplotlib-11557c.svg?style=for-the-badge&logo=matplotlib&logoColor=white",
+          "url": "https://matplotlib.org/"
+        }
+      ]
+    },
+    "getting_started": {
+      "enabled": true,
+      "prerequisites": [
+        {
+          "name": "Python 3.8+",
+          "command": "python --version"
+        },
+        {
+          "name": "pip",
+          "command": "pip --version"
+        }
+      ],
+      "installation_steps": [
+        {
+          "text": "Install from PyPI",
+          "command": "pip install ds-toolkit"
+        },
+        {
+          "text": "Or install from source",
+          "command": "git clone https://github.com/datascience-team/ds-toolkit.git\ncd ds-toolkit\npip install -e ."
+        },
+        {
+          "text": "Verify installation",
+          "command": "python -c \"import ds_toolkit; print(ds_toolkit.__version__)\"",
+          "language": "python"
+        }
+      ]
+    },
+    "usage": {
+      "enabled": true,
+      "content": "### Quick Example\n\n```python\nimport ds_toolkit as dst\nimport pandas as pd\n\n# Load and preprocess data\ndata = dst.load_sample_dataset('iris')\nprocessed_data = dst.preprocess(data, normalize=True)\n\n# Train a model\nmodel = dst.AutoML()\nmodel.fit(processed_data.features, processed_data.target)\n\n# Generate insights\nresults = dst.analyze_model(model, processed_data)\ndst.plot_results(results)\n```\n\n### Features\n\n- **Automated preprocessing**: Handle missing values, scaling, encoding\n- **AutoML capabilities**: Automated model selection and hyperparameter tuning  \n- **Rich visualizations**: Publication-ready plots and charts\n- **Model interpretation**: SHAP values, feature importance, and more\n\nSee the [documentation](https://ds-toolkit.readthedocs.io) for detailed examples."
+    },
+    "roadmap": {
+      "enabled": true,
+      "items": [
+        {
+          "text": "Deep Learning Integration",
+          "completed": false,
+          "subitems": [
+            {
+              "text": "TensorFlow backend",
+              "completed": false
+            },
+            {
+              "text": "PyTorch backend",
+              "completed": false
+            }
+          ]
+        },
+        {
+          "text": "Time Series Analysis Module",
+          "completed": false
+        },
+        {
+          "text": "Distributed Computing Support",
+          "completed": false
+        },
+        {
+          "text": "Interactive Jupyter Widgets",
+          "completed": true
+        }
+      ]
+    },
+    "contributing": {
+      "enabled": true,
+      "show_contributors": true
+    },
+    "license": {
+      "enabled": true
+    },
+    "contact": {
+      "enabled": true
+    },
+    "acknowledgments": {
+      "enabled": true,
+      "items": [
+        {
+          "name": "Scikit-learn Community",
+          "url": "https://scikit-learn.org/"
+        },
+        {
+          "name": "Pandas Development Team",
+          "url": "https://pandas.pydata.org/"
+        },
+        {
+          "name": "Matplotlib Developers",
+          "url": "https://matplotlib.org/"
+        },
+        {
+          "name": "NumPy Community",
+          "url": "https://numpy.org/"
+        }
+      ]
+    }
+  }
+}

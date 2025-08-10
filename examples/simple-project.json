@@ -1,0 +1,78 @@
+{
+  "project": {
+    "title": "My Awesome Project",
+    "description": "A simple project demonstrating basic README generation with minimal configuration.",
+    "logo_path": "assets/logo.png",
+    "screenshot_path": "assets/screenshot.png"
+  },
+  "repository": {
+    "github_username": "yourusername",
+    "repo_name": "my-awesome-project",
+    "license": "MIT License",
+    "license_file": "LICENSE"
+  },
+  "contact": {
+    "name": "Your Name",
+    "email": "your.email@example.com",
+    "socials": []
+  },
+  "badges": {
+    "contributors": true,
+    "forks": true,
+    "stars": true,
+    "issues": true,
+    "license": true
+  },
+  "sections": {
+    "about": {
+      "enabled": true,
+      "content": "This is a simple project that demonstrates the basic features of README generation."
+    },
+    "built_with": {
+      "enabled": false
+    },
+    "getting_started": {
+      "enabled": true,
+      "prerequisites": [
+        {
+          "name": "Node.js",
+          "command": "npm install -g npm"
+        }
+      ],
+      "installation_steps": [
+        {
+          "text": "Clone the repository",
+          "command": "git clone https://github.com/yourusername/my-awesome-project.git"
+        },
+        {
+          "text": "Install dependencies",
+          "command": "npm install"
+        },
+        {
+          "text": "Start the application",
+          "command": "npm start"
+        }
+      ]
+    },
+    "usage": {
+      "enabled": true,
+      "content": "Run `npm start` to start the application. Visit http://localhost:3000 to see it in action."
+    },
+    "roadmap": {
+      "enabled": false
+    },
+    "contributing": {
+      "enabled": true,
+      "show_contributors": false
+    },
+    "license": {
+      "enabled": true
+    },
+    "contact": {
+      "enabled": true
+    },
+    "acknowledgments": {
+      "enabled": false
+    }
+  }
+}
