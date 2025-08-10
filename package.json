@@ -45,5 +45,5 @@
     "test:unit": "node src/test.js",
     "validate": "npm run generate && git diff --exit-code README.md"
   },
-  "version": "1.0.0"
+  "version": "1.1.0"
 }
