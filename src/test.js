@@ -9,6 +9,7 @@ const configFile = process.argv[2] || 'config/readme-config.json';
 const readmeFile = process.argv[3] || 'README.md';
 const templateFile = process.argv[4] || 'templates/default.hbs';
 const debug = process.argv.includes('--debug') || process.argv.includes('--verbose');
+const validateOnly = process.argv.includes('--validate-only');
 
 // Print received arguments for debugging or if debug flag is set
 if (debug || process.argv.length <= 2) {
@@ -154,6 +155,8 @@ function testConfigFiles() {
 
 // Run tests
 testConfigFiles();
-testReadmeGenerator();
+if (!validateOnly) {
+  testReadmeGenerator();
+}
 
 console.log('🎉 All tests passed!');

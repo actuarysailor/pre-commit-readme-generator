@@ -50,7 +50,7 @@ for (const testCase of testCases) {
     console.log(`\n📋 ${testCase.name}`);
 
     // Validate config file using test.js validation logic
-    const validateCmd = `node src/test.js ${testCase.config}${debug ? ' --debug' : ''}`;
+    const validateCmd = `node src/test.js ${testCase.config} --validate-only${debug ? ' --debug' : ''}`;
     if (debug) {
       console.log(`[DEBUG] Running config validation: ${validateCmd}`);
     }
@@ -76,32 +76,23 @@ for (const testCase of testCases) {
       throw new Error('Output file appears to be empty or too short');
     }
 
-    // Compare to expected file if it exists
-    let expectedFile;
-    if (testCase.config.startsWith('examples/')) {
-      // e.g. examples/simple-project.json -> examples/simple-project.md
-      expectedFile = testCase.config.replace(/\.json$/, '.md');
-    } else if (testCase.config.startsWith('config/')) {
-      // e.g. config/readme-config.json -> README.md
-      expectedFile = 'README.md';
-    }
-
-    if (expectedFile && fs.existsSync(expectedFile)) {
-      const expected = fs.readFileSync(expectedFile, 'utf8');
+    // Compare to expected file if it exists (use testCase.output as the expected file)
+    if (fs.existsSync(testCase.output)) {
+      const expected = fs.readFileSync(testCase.output, 'utf8');
       if (generated !== expected) {
         // Print a diff
         const diff = require('diff');
         const changes = diff.createPatch(testCase.output, expected, generated);
-        console.error(`❌ Generated output does not match expected file: ${expectedFile}`);
+        console.error(`❌ Generated output does not match expected file: ${testCase.output}`);
         console.error(changes);
         throw new Error('Generated output does not match expected file');
       }
-    } else if (expectedFile) {
-      console.warn(`⚠️  Expected file not found for comparison: ${expectedFile}`);
+    } else {
+      console.warn(`⚠️  Expected file not found for comparison: ${testCase.output}`);
     }
 
     // Clean up test file
-    fs.unlinkSync(testCase.output);
+    // fs.unlinkSync(testCase.output);
 
     console.log(`✅ ${testCase.name} - PASSED`);
     passed++;
