@@ -1,9 +1,18 @@
 #!/usr/bin/env node
 
+
 const fs = require('fs');
 const { execSync } = require('child_process');
 
+// Parse --debug or --verbose flag
+const debug = process.argv.includes('--debug') || process.argv.includes('--verbose');
+
+
 console.log('🧪 Running integration tests...');
+if (debug) {
+  console.log('[DEBUG] Debug mode enabled. Extra output will be shown.');
+  console.log('[DEBUG] Test cases:', JSON.stringify(testCases, null, 2));
+}
 
 const testCases = [
   {
@@ -29,13 +38,24 @@ const testCases = [
 let passed = 0;
 let failed = 0;
 
+
 for (const testCase of testCases) {
   try {
     console.log(`\n📋 ${testCase.name}`);
 
+    // Validate config file using test.js validation logic
+    const validateCmd = `node src/test.js ${testCase.config} NUL NUL${debug ? ' --debug' : ''}`;
+    if (debug) {
+      console.log(`[DEBUG] Running config validation: ${validateCmd}`);
+    }
+    execSync(validateCmd, { stdio: debug ? 'inherit' : 'pipe' });
+
     // Generate README
-    const command = `node src/generator.js ${testCase.config} ${testCase.output} ${testCase.template}`;
-    execSync(command, { stdio: 'pipe' });
+    const command = `node src/generator.js ${testCase.config} ${testCase.output} ${testCase.template}${debug ? ' --debug' : ''}`;
+    if (debug) {
+      console.log(`[DEBUG] Running command: ${command}`);
+    }
+    execSync(command, { stdio: debug ? 'inherit' : 'pipe' });
 
     // Check if output file exists and has content
     if (!fs.existsSync(testCase.output)) {
@@ -43,6 +63,9 @@ for (const testCase of testCases) {
     }
 
     const content = fs.readFileSync(testCase.output, 'utf8');
+    if (debug) {
+      console.log(`[DEBUG] Output file content (first 200 chars):\n${content.slice(0, 200)}`);
+    }
     if (content.length < 100) {
       throw new Error('Output file appears to be empty or too short');
     }
@@ -63,6 +86,9 @@ for (const testCase of testCases) {
 
   } catch (error) {
     console.log(`❌ ${testCase.name} - FAILED: ${error.message}`);
+    if (debug && error.stack) {
+      console.log('[DEBUG] Stack trace:', error.stack);
+    }
     failed++;
   }
 }

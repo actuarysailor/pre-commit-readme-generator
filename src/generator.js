@@ -104,10 +104,12 @@ function generateReadme(configPath, outputPath = 'README.md', templatePath = 'BL
   }
 }
 
-// Command line usage
+
+// Command line usage with --debug flag
 if (require.main === module) {
+  const debug = process.argv.includes('--debug') || process.argv.includes('--verbose');
   if (process.argv.length < 4) {
-    console.error('Usage: node generator.js <config.json> <output.md> [template.md]');
+    console.error('Usage: node generator.js <config.json> <output.md> [template.md] [--debug]');
     process.exit(1);
   }
 
@@ -115,7 +117,31 @@ if (require.main === module) {
   const outputPath = process.argv[3];
   const templatePath = process.argv[4] || 'BLANK_README.md'; // Default to BLANK_README.md
 
-  generateReadme(configPath, outputPath, templatePath);
+  if (debug) {
+    console.log('[generator.js] Debug mode enabled.');
+    console.log('[generator.js] Arguments:');
+    console.log('  configPath:', configPath);
+    console.log('  outputPath:', outputPath);
+    console.log('  templatePath:', templatePath);
+  }
+
+  // Wrap generateReadme to add debug output
+  try {
+    generateReadme(configPath, outputPath, templatePath);
+    if (debug) {
+      if (fs.existsSync(outputPath)) {
+        const content = fs.readFileSync(outputPath, 'utf8');
+        console.log(`[generator.js] Output file content (first 200 chars):\n${content.slice(0, 200)}`);
+      } else {
+        console.log('[generator.js] Output file was not created.');
+      }
+    }
+  } catch (error) {
+    if (debug && error.stack) {
+      console.error('[generator.js] Debug: Stack trace:', error.stack);
+    }
+    throw error;
+  }
 }
 
 module.exports = { generateReadme };
