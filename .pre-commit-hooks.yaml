@@ -3,7 +3,7 @@
   description: Validates that README.md matches generated output from template
   entry: node src/test.js
   language: system
-  files: '^(.*README\.md|configs/.*\.json|.*\.hbs|BLANK_README\.md)$'
+  files: '^(.*README\.md|config/.*\.json|.*\.hbs|BLANK_README\.md)$'
   require_serial: true
   pass_filenames: false
 
@@ -12,6 +12,6 @@
   description: Updates README.md from template configuration
   entry: node src/generator.js
   language: system
-  files: '^(configs/.*\.json|.*\.hbs|BLANK_README\.md)$'
+  files: '^(config/.*\.json|.*\.hbs|BLANK_README\.md)$'
   require_serial: true
   pass_filenames: false
