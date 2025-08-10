@@ -9,7 +9,7 @@ repos:
         language: node
         files: \.(js|json|hbs|md)$
         pass_filenames: false
-      
+
       # Validate README is up to date
       - id: readme-generator-validate
         name: README Generator Validate
@@ -60,7 +60,7 @@ ci:
     style: auto fixes from pre-commit.ci hooks
 
     Applied automatic formatting and linting fixes.
-    
+
     For more information, see https://pre-commit.ci
   autofix_prs: true
   autoupdate_branch: ''

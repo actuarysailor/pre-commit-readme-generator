@@ -293,7 +293,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 | 📧 | [your.email@example.com](mailto:your.email@example.com) |
 | 🐙 | [@actuarysailor](https://github.com/actuarysailor) |
 
-
 **Project Link:** [https://github.com/actuarysailor/pre-commit-readme-generator](https://github.com/actuarysailor/pre-commit-readme-generator)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

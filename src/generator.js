@@ -75,7 +75,6 @@ function generateReadme(configPath, outputPath = 'README.md', templatePath = 'BL
     // Resolve paths relative to project root
     const rootDir = path.resolve(__dirname, '..');
     const fullConfigPath = path.resolve(rootDir, configPath);
-    const fullTemplatePath = path.resolve(rootDir, templatePath);
     const fullOutputPath = path.resolve(rootDir, outputPath);
 
     // Read configuration

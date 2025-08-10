@@ -18,13 +18,13 @@ function testReadmeGenerator() {
   const readmePath = path.resolve(process.cwd(), 'README.md');
   const configPath = path.resolve(process.cwd(), 'config', 'readme-config.json');
   const templatePath = path.resolve(process.cwd(), 'templates', 'default.hbs');
-  
+
   // Check if required files exist
   if (!fs.existsSync(configPath)) {
     console.error('❌ Main config file not found:', configPath);
     process.exit(1);
   }
-  
+
   if (!fs.existsSync(templatePath)) {
     console.error('❌ Template file not found:', templatePath);
     process.exit(1);
@@ -82,11 +82,11 @@ function testConfigFiles() {
 
   // Test both config and examples directories
   const testDirs = ['config', 'examples'];
-  
+
   for (const dirName of testDirs) {
     const configDir = path.resolve(__dirname, '..', dirName);
     if (!fs.existsSync(configDir)) continue;
-    
+
     const configFiles = fs.readdirSync(configDir).filter(file => file.endsWith('.json'));
 
     for (const configFile of configFiles) {

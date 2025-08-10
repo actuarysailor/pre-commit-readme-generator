@@ -91,7 +91,7 @@ template and configuration.
   "socials": [
     {
       "platform": "string",
-      "username": "string", 
+      "username": "string",
       "url": "string",
       "icon": "string",
       "enabled": boolean

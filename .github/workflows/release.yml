@@ -13,11 +13,11 @@ jobs:
         id: release
         with:
           release-type: node
-          
+
       # The logic below will be executed when a release is created
       - uses: actions/checkout@v4
         if: ${{ steps.release.outputs.release_created }}
-        
+
       - name: Use Node.js 20.x
         uses: actions/setup-node@v4
         if: ${{ steps.release.outputs.release_created }}
@@ -25,13 +25,13 @@ jobs:
           node-version: 20.x
           cache: 'npm'
           registry-url: 'https://registry.npmjs.org'
-      
+
       - run: npm ci
         if: ${{ steps.release.outputs.release_created }}
-        
+
       - run: npm test
         if: ${{ steps.release.outputs.release_created }}
-      
+
       # Optional: Publish to npm registry when a release is created
       # - run: npm publish
       #   if: ${{ steps.release.outputs.release_created }}

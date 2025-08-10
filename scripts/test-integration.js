@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
-const path = require('path');
 const { execSync } = require('child_process');
 
 console.log('🧪 Running integration tests...');
@@ -33,21 +32,21 @@ let failed = 0;
 for (const testCase of testCases) {
   try {
     console.log(`\n📋 ${testCase.name}`);
-    
+
     // Generate README
     const command = `node src/generator.js ${testCase.config} ${testCase.output} ${testCase.template}`;
     execSync(command, { stdio: 'pipe' });
-    
+
     // Check if output file exists and has content
     if (!fs.existsSync(testCase.output)) {
       throw new Error('Output file was not created');
     }
-    
+
     const content = fs.readFileSync(testCase.output, 'utf8');
     if (content.length < 100) {
       throw new Error('Output file appears to be empty or too short');
     }
-    
+
     // Check for basic README structure
     const requiredSections = ['# ', '## '];
     for (const section of requiredSections) {
@@ -55,13 +54,13 @@ for (const testCase of testCases) {
         throw new Error(`Missing required section: ${section}`);
       }
     }
-    
+
     // Clean up test file
     fs.unlinkSync(testCase.output);
-    
+
     console.log(`✅ ${testCase.name} - PASSED`);
     passed++;
-    
+
   } catch (error) {
     console.log(`❌ ${testCase.name} - FAILED: ${error.message}`);
     failed++;

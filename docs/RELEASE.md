@@ -14,7 +14,7 @@ to automate releases and changelog generation.
 
 Use conventional commit format:
 
-```
+```text
 <type>[optional scope]: <description>
 
 [optional body]
