@@ -8,8 +8,8 @@ lerna-debug.log*
 .pnpm-debug.log*
 
 # Test outputs
-test-*.md
-test-integration-*.md
+# test-*.md
+# test-integration-*.md
 
 # Placeholder files (keep actual assets)
 images/*-placeholder.md

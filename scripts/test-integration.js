@@ -16,22 +16,28 @@ if (debug) {
 
 const testCases = [
   {
-    name: 'Generate with main config',
-    config: 'config/readme-config.json',
+    name: 'Generate with enterprise api config',
+    config: 'examples/enterprise-api.json',
     template: 'templates/default.hbs',
-    output: 'test-integration-main.md'
+    output: 'examples/test-integration-enterprise-api.md'
+  },
+  {
+    name: 'Generate with main config',
+    config: 'examples/python-datascience.json',
+    template: 'templates/default.hbs',
+    output: 'examples/test-integration-python-datascience.md'
   },
   {
     name: 'Generate with simple example',
     config: 'examples/simple-project.json',
     template: 'templates/default.hbs',
-    output: 'test-integration-simple.md'
+    output: 'examples/test-integration-simple.md'
   },
   {
     name: 'Generate with minimal config',
     config: 'examples/minimal.json',
     template: 'templates/default.hbs',
-    output: 'test-integration-minimal.md'
+    output: 'examples/test-integration-minimal.md'
   }
 ];
 
@@ -62,20 +68,36 @@ for (const testCase of testCases) {
       throw new Error('Output file was not created');
     }
 
-    const content = fs.readFileSync(testCase.output, 'utf8');
+    const generated = fs.readFileSync(testCase.output, 'utf8');
     if (debug) {
-      console.log(`[DEBUG] Output file content (first 200 chars):\n${content.slice(0, 200)}`);
+      console.log(`[DEBUG] Output file content (first 200 chars):\n${generated.slice(0, 200)}`);
     }
-    if (content.length < 100) {
+    if (generated.length < 100) {
       throw new Error('Output file appears to be empty or too short');
     }
 
-    // Check for basic README structure
-    const requiredSections = ['# ', '## '];
-    for (const section of requiredSections) {
-      if (!content.includes(section)) {
-        throw new Error(`Missing required section: ${section}`);
+    // Compare to expected file if it exists
+    let expectedFile;
+    if (testCase.config.startsWith('examples/')) {
+      // e.g. examples/simple-project.json -> examples/simple-project.md
+      expectedFile = testCase.config.replace(/\.json$/, '.md');
+    } else if (testCase.config.startsWith('config/')) {
+      // e.g. config/readme-config.json -> README.md
+      expectedFile = 'README.md';
+    }
+
+    if (expectedFile && fs.existsSync(expectedFile)) {
+      const expected = fs.readFileSync(expectedFile, 'utf8');
+      if (generated !== expected) {
+        // Print a diff
+        const diff = require('diff');
+        const changes = diff.createPatch(testCase.output, expected, generated);
+        console.error(`❌ Generated output does not match expected file: ${expectedFile}`);
+        console.error(changes);
+        throw new Error('Generated output does not match expected file');
       }
+    } else if (expectedFile) {
+      console.warn(`⚠️  Expected file not found for comparison: ${expectedFile}`);
     }
 
     // Clean up test file
