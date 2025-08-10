@@ -44,7 +44,7 @@ for (const testCase of testCases) {
     console.log(`\n📋 ${testCase.name}`);
 
     // Validate config file using test.js validation logic
-    const validateCmd = `node src/test.js ${testCase.config} NUL NUL${debug ? ' --debug' : ''}`;
+    const validateCmd = `node src/test.js ${testCase.config}${debug ? ' --debug' : ''}`;
     if (debug) {
       console.log(`[DEBUG] Running config validation: ${validateCmd}`);
     }
