@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/actuarysailor/pre-commit-readme-generator/compare/v1.0.0...v1.1.0) (2025-08-10)
+
+
+### Features
+
+* add Node.js version requirement and fix hook paths ([7259ba6](https://github.com/actuarysailor/pre-commit-readme-generator/commit/7259ba6f206c4e9d735a432d58e966aab92cfa08))
+
 ## 1.0.0 (2025-08-10)
 
 
