@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.2](https://github.com/actuarysailor/pre-commit-readme-generator/compare/v1.1.1...v1.1.2) (2025-08-10)
+
+
+### Bug Fixes
+
+* The test hook for pre-commit had many parameters hard-coded ([684193b](https://github.com/actuarysailor/pre-commit-readme-generator/commit/684193b0a5496262bed3747d2173072e5e263735))
+* The test hook for pre-commit had many parameters hard-coded which did not work. ([950ea50](https://github.com/actuarysailor/pre-commit-readme-generator/commit/950ea50e3622a7fb1790bd48a0d740388c209095))
+
 ## [1.1.1](https://github.com/actuarysailor/pre-commit-readme-generator/compare/v1.1.0...v1.1.1) (2025-08-10)
 
 
