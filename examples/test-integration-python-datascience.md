@@ -150,8 +150,10 @@ or services._
 
    ```sh
    git clone https://github.com/datascience-team/ds-toolkit.git
+
 cd ds-toolkit
 pip install -e .
+
    ```
 
 3. Verify installation
