@@ -9,16 +9,16 @@ repos:
         language: node
         files: \.(js|json|hbs|md)$
         pass_filenames: false
+        additional_dependencies: ['handlebars@^4.7.8']
 
       # Validate README is up to date
       - id: readme-generator-validate
         name: README Generator Validate
-        entry: npm run validate
-        language: system
+        entry: node src/validate.js
+        language: node
         files: ^(config/|templates/|src/).*$
         pass_filenames: false
-
-  # Markdown linting and formatting
+        additional_dependencies: ['handlebars@^4.7.8']  # Markdown linting and formatting
   - repo: https://github.com/igorshubovych/markdownlint-cli
     rev: v0.37.0
     hooks:
