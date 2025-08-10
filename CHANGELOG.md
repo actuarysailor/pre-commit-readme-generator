@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.1](https://github.com/actuarysailor/pre-commit-readme-generator/compare/v1.1.0...v1.1.1) (2025-08-10)
+
+
+### Bug Fixes
+
+* Allow external filenames to be passed ([9aa43f6](https://github.com/actuarysailor/pre-commit-readme-generator/commit/9aa43f6228fbf6e41bd154c2961fd97e3abeadb6))
+* Enable NPM Publishing ([7d685b5](https://github.com/actuarysailor/pre-commit-readme-generator/commit/7d685b58fcfadfb3218c68f2fc1e72496aa9ca2f))
+* Enable NPM Publishing ([f357c7a](https://github.com/actuarysailor/pre-commit-readme-generator/commit/f357c7a0d6ee2ecfce7701e87830f9e42a61cbf7))
+
 ## [1.1.0](https://github.com/actuarysailor/pre-commit-readme-generator/compare/v1.0.0...v1.1.0) (2025-08-10)
 
 
