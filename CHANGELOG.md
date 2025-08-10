@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.3](https://github.com/actuarysailor/pre-commit-readme-generator/compare/v1.1.2...v1.1.3) (2025-08-10)
+
+
+### Bug Fixes
+
+* Add markdowns for each example file ([63a7519](https://github.com/actuarysailor/pre-commit-readme-generator/commit/63a751983676c6c772f3548e5666988ec66b45ce))
+* Enhanced debugging ([cedb507](https://github.com/actuarysailor/pre-commit-readme-generator/commit/cedb5076870b5b4baf19c17b06414b1c5c948c28))
+* Enhanced debugging ([3e246fb](https://github.com/actuarysailor/pre-commit-readme-generator/commit/3e246fbe1fab0ba2d652d0ab626609fcbc281a26))
+* Error in code ([10ce7be](https://github.com/actuarysailor/pre-commit-readme-generator/commit/10ce7be73ed718e0f5a12517d00e9b5bb4d3f93c))
+* Exclude markdown lint from looking at examples ([49ef68c](https://github.com/actuarysailor/pre-commit-readme-generator/commit/49ef68c11eae66621e9b3709d67810ada433a650))
+* Prevent linting from causing errors on examples ([55ac134](https://github.com/actuarysailor/pre-commit-readme-generator/commit/55ac134bb640340e4290f4ec84188e7601d6c6a9))
+* Prevent linting from causing errors on examples ([8a22104](https://github.com/actuarysailor/pre-commit-readme-generator/commit/8a221047e0bba1e0e4debf7ed15920a14cefaea6))
+* Validation of config files ([5bd80a0](https://github.com/actuarysailor/pre-commit-readme-generator/commit/5bd80a0d8ffb9dc16a7da95f8ef86ee8da7f7e73))
+
 ## [1.1.2](https://github.com/actuarysailor/pre-commit-readme-generator/compare/v1.1.1...v1.1.2) (2025-08-10)
 
 
