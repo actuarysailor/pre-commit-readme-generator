@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/actuarysailor/pre-commit-readme-generator/compare/v1.1.4...v2.0.0) (2025-08-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* **generator:** unify comment stripping and output logic for consistent README generation ([#31](https://github.com/actuarysailor/pre-commit-readme-generator/issues/31))
+
+### Code Refactoring
+
+* **generator:** unify comment stripping and output logic for consistent README generation ([#31](https://github.com/actuarysailor/pre-commit-readme-generator/issues/31)) ([f92983e](https://github.com/actuarysailor/pre-commit-readme-generator/commit/f92983e7791c980836b099a6be0bd08b0c6cad95))
+
 ## [1.1.4](https://github.com/actuarysailor/pre-commit-readme-generator/compare/v1.1.3...v1.1.4) (2025-08-11)
 
 
