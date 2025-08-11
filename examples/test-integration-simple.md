@@ -75,11 +75,9 @@ See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-
     <li><a href="docs/FAQ.md">FAQ</a></li>
   </ol>
 </details>

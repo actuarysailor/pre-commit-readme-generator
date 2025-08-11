@@ -32,6 +32,9 @@ function stripTemplateComments(content) {
   // Clean up multiple consecutive blank lines (more than 2)
   cleanContent = cleanContent.replace(/\n{3,}/g, '\n\n');
 
+  // Trim trailing whitespace from each line (to match pre-commit trailing-whitespace hook)
+  cleanContent = cleanContent.split('\n').map(line => line.replace(/[ \t]+$/g, '')).join('\n');
+
   return cleanContent;
 }
 
@@ -95,6 +98,14 @@ function generateReadme(configPath, outputPath, templatePath, opts = {}) {
   console.log(`📄 Used config: ${configPath}`);
   console.log(`📋 Used template: ${templatePath}`);
   console.log(`🧹 Stripped template comments from output`);
+
+  // Check for .markdownlint.json config file before running markdownlint
+  const lintConfigPath = `${rootDir}/.markdownlint.json`;
+  if (fs.existsSync(lintConfigPath)) {
+    console.log(`🔍 Found markdownlint config: ${lintConfigPath}`);
+  } else {
+    console.warn('⚠️  No .markdownlint.json found in working directory. markdownlint will use defaults.');
+  }
 
   // Run markdownlint --fix on the generated file
   try {

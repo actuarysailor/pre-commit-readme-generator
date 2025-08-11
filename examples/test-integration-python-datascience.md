@@ -188,7 +188,7 @@ dst.plot_results(results)
 ### Features
 
 - **Automated preprocessing**: Handle missing values, scaling, encoding
-- **AutoML capabilities**: Automated model selection and hyperparameter tuning  
+- **AutoML capabilities**: Automated model selection and hyperparameter tuning
 - **Rich visualizations**: Publication-ready plots and charts
 - **Model interpretation**: SHAP values, feature importance, and more
 
