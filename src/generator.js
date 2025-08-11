@@ -1,46 +1,13 @@
 #!/usr/bin/env node
 const fs = require('fs');
-const path = require('path');
+// const path = require('path'); // Removed unused import
 const Handlebars = require('handlebars');
 
-// Register custom helpers
-Handlebars.registerHelper('if', function(conditional, options) {
-  if (conditional) {
-    return options.fn(this);
-  } else {
-    return options.inverse(this);
-  }
-});
-
-Handlebars.registerHelper('unless', function(conditional, options) {
-  if (!conditional) {
-    return options.fn(this);
-  } else {
-    return options.inverse(this);
-  }
-});
-
-Handlebars.registerHelper('eq', function(a, b, options) {
-  if (a === b) {
-    return options.fn(this);
-  } else {
-    return options.inverse(this);
-  }
-});
-
-// Add helper for 1-based indexing
+// Register increment helper for Handlebars
 Handlebars.registerHelper('increment', function(value) {
-  return parseInt(value) + 1;
+  return parseInt(value, 10) + 1;
 });
 
-// Add helper for specific step checks
-Handlebars.registerHelper('isStep', function(index, step, options) {
-  if (parseInt(index) === parseInt(step) - 1) { // Convert to 0-based for comparison
-    return options.fn(this);
-  } else {
-    return options.inverse(this);
-  }
-});
 
 function stripTemplateComments(content) {
   // Remove only template-specific comments, not user-helpful section headers
@@ -65,93 +32,106 @@ function stripTemplateComments(content) {
   // Clean up multiple consecutive blank lines (more than 2)
   cleanContent = cleanContent.replace(/\n{3,}/g, '\n\n');
 
+  // Trim trailing whitespace from each line (to match pre-commit trailing-whitespace hook)
+  cleanContent = cleanContent.split('\n').map(line => line.replace(/[ \t]+$/g, '')).join('\n');
+
   return cleanContent;
 }
 
-function generateReadme(configPath, outputPath = 'README.md', templatePath = 'BLANK_README.md') {
+function printUsageAndExit() {
+  console.error('Usage: node generator.js <config.json> <output.md> [template.md] [--debug|--validate-only]');
+  process.exit(1);
+}
+
+function generateReadme(configPath, outputPath, templatePath, opts = {}) {
+  const debug = opts.debug || false;
+  const validateOnly = opts.validateOnly || false;
+  const rootDir = process.cwd();
+
+  let config;
   try {
-    // Read template from the specified path (defaults to BLANK_README.md in current repo)
-    const template = fs.readFileSync(templatePath, 'utf8');
-
-    // Resolve paths relative to project root
-    const rootDir = path.resolve(__dirname, '..');
-    const fullConfigPath = path.resolve(rootDir, configPath);
-    const fullOutputPath = path.resolve(rootDir, outputPath);
-
-    // Read configuration
-    const config = JSON.parse(fs.readFileSync(fullConfigPath, 'utf8'));
-
-    // Compile template
-    const compiledTemplate = Handlebars.compile(template);
-
-    // Generate README
-    const readme = compiledTemplate(config);
-
-    // Strip all template comments from generated output
-    const cleanReadme = stripTemplateComments(readme);
-
-    // Write output
-    fs.writeFileSync(fullOutputPath, cleanReadme);
-
-    // Run markdownlint --fix on the generated file
-    try {
-      const { execSync } = require('child_process');
-      const lintCmd = `npx markdownlint-cli2 fix "${fullOutputPath}" --config .markdownlint.json`;
-      execSync(lintCmd, { stdio: 'inherit', cwd: rootDir });
-      console.log(`🧹 Ran markdownlint --fix on: ${outputPath}`);
-    } catch (lintError) {
-      console.warn('⚠️  markdownlint --fix failed or is not installed. Skipping linting.');
-    }
-
-    console.log(`✅ README generated successfully: ${outputPath}`);
-    console.log(`📄 Used config: ${configPath}`);
-    console.log(`📋 Used template: ${templatePath}`);
-    console.log(`🧹 Stripped template comments from output`);
-
-  } catch (error) {
-    console.error('❌ Error generating README:', error.message);
+    config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+  } catch (e) {
+    console.error('Failed to read config:', e.message);
     process.exit(1);
+  }
+
+  let template;
+  try {
+    template = fs.readFileSync(templatePath, 'utf8');
+  } catch (e) {
+    console.error('Failed to read template:', e.message);
+    process.exit(1);
+  }
+
+  // Compile and generate
+  const compiled = Handlebars.compile(template);
+  let readme = compiled(config);
+  readme = stripTemplateComments(readme);
+
+  // Normalize line endings to LF and ensure a single newline at EOF
+  readme = readme.replace(/\r\n?/g, '\n');
+  readme = readme.replace(/\s*$/, '') + '\n';
+
+  if (validateOnly) {
+    let current = '';
+    try {
+      current = fs.readFileSync(outputPath, 'utf8');
+    } catch (e) {
+      if (debug) {
+        console.error('README does not exist and would be created.');
+      }
+      process.exit(1);
+    }
+    if (current !== readme) {
+      if (debug) {
+        console.error('README would change.');
+      }
+      process.exit(1);
+    }
+    if (debug) {
+      console.log('README is up to date.');
+    }
+    process.exit(0);
+  }
+
+  // Write output
+  fs.writeFileSync(outputPath, readme);
+
+  console.log(`✅ README generated successfully: ${outputPath}`);
+  console.log(`📄 Used config: ${configPath}`);
+  console.log(`📋 Used template: ${templatePath}`);
+  console.log(`🧹 Stripped template comments from output`);
+
+  // Check for .markdownlint.json config file before running markdownlint
+  const lintConfigPath = `${rootDir}/.markdownlint.json`;
+  if (fs.existsSync(lintConfigPath)) {
+    console.log(`🔍 Found markdownlint config: ${lintConfigPath}`);
+  } else {
+    console.warn('⚠️  No .markdownlint.json found in working directory. markdownlint will use defaults.');
+  }
+
+  // Run markdownlint --fix on the generated file
+  try {
+    const { execSync } = require('child_process');
+    const lintCmd = `npx markdownlint-cli2 fix "${outputPath}" --config .markdownlint.json`;
+    execSync(lintCmd, { stdio: 'inherit', cwd: rootDir });
+    console.log(`🧹 Ran markdownlint --fix on: ${outputPath}`);
+  } catch (lintError) {
+    console.warn('⚠️  markdownlint --fix failed or is not installed. Skipping linting.');
   }
 }
 
-
-// Command line usage with --debug flag
 if (require.main === module) {
-  const debug = process.argv.includes('--debug') || process.argv.includes('--verbose');
-  if (process.argv.length < 4) {
-    console.error('Usage: node generator.js <config.json> <output.md> [template.md] [--debug]');
-    process.exit(1);
+  const args = process.argv.slice(2);
+  const debug = args.includes('--debug') || args.includes('--verbose');
+  const validateOnly = args.includes('--validate-only');
+  const filteredArgs = args.filter(arg => arg !== '--debug' && arg !== '--verbose' && arg !== '--validate-only');
+  if (filteredArgs.length < 2) {
+    printUsageAndExit();
   }
-
-  const configPath = process.argv[2];
-  const outputPath = process.argv[3];
-  const templatePath = process.argv[4] || 'BLANK_README.md'; // Default to BLANK_README.md
-
-  if (debug) {
-    console.log('[generator.js] Debug mode enabled.');
-    console.log('[generator.js] Arguments:');
-    console.log('  configPath:', configPath);
-    console.log('  outputPath:', outputPath);
-    console.log('  templatePath:', templatePath);
-  }
-
-  // Wrap generateReadme to add debug output
-  try {
-    generateReadme(configPath, outputPath, templatePath);
-    if (debug) {
-      if (fs.existsSync(outputPath)) {
-        const content = fs.readFileSync(outputPath, 'utf8');
-        console.log(`[generator.js] Output file content (first 200 chars):\n${content.slice(0, 200)}`);
-      } else {
-        console.log('[generator.js] Output file was not created.');
-      }
-    }
-  } catch (error) {
-    if (debug && error.stack) {
-      console.error('[generator.js] Debug: Stack trace:', error.stack);
-    }
-    throw error;
-  }
+  const [configPath, outputPath, templatePath = 'templates/default.hbs'] = filteredArgs;
+  generateReadme(configPath, outputPath, templatePath, { debug, validateOnly });
 }
 
 module.exports = { generateReadme };

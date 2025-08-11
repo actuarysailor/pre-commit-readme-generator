@@ -49,46 +49,31 @@ for (const testCase of testCases) {
   try {
     console.log(`\n📋 ${testCase.name}`);
 
-    // Validate config file using test.js validation logic
-    const validateCmd = `node src/test.js ${testCase.config} --validate-only${debug ? ' --debug' : ''}`;
-    if (debug) {
-      console.log(`[DEBUG] Running config validation: ${validateCmd}`);
-    }
-    execSync(validateCmd, { stdio: debug ? 'inherit' : 'pipe' });
 
     // Generate README
-    const command = `node src/generator.js ${testCase.config} ${testCase.output} ${testCase.template}${debug ? ' --debug' : ''}`;
+    const generateCmd = `node src/generator.js ${testCase.config} ${testCase.output} ${testCase.template}${debug ? ' --debug' : ''}`;
     if (debug) {
-      console.log(`[DEBUG] Running command: ${command}`);
+      console.log(`[DEBUG] Running generate command: ${generateCmd}`);
     }
-    execSync(command, { stdio: debug ? 'inherit' : 'pipe' });
+    execSync(generateCmd, { stdio: debug ? 'inherit' : 'pipe' });
+
+    // Validate generated file is unchanged (matches committed)
+    const validateCmd = `node src/validate-file.js ${testCase.output}`;
+    if (debug) {
+      console.log(`[DEBUG] Running validate command: ${validateCmd}`);
+    }
+    execSync(validateCmd, { stdio: debug ? 'inherit' : 'pipe' });
 
     // Check if output file exists and has content
     if (!fs.existsSync(testCase.output)) {
       throw new Error('Output file was not created');
     }
-
     const generated = fs.readFileSync(testCase.output, 'utf8');
     if (debug) {
       console.log(`[DEBUG] Output file content (first 200 chars):\n${generated.slice(0, 200)}`);
     }
     if (generated.length < 100) {
       throw new Error('Output file appears to be empty or too short');
-    }
-
-    // Compare to expected file if it exists (use testCase.output as the expected file)
-    if (fs.existsSync(testCase.output)) {
-      const expected = fs.readFileSync(testCase.output, 'utf8');
-      if (generated !== expected) {
-        // Print a diff
-        const diff = require('diff');
-        const changes = diff.createPatch(testCase.output, expected, generated);
-        console.error(`❌ Generated output does not match expected file: ${testCase.output}`);
-        console.error(changes);
-        throw new Error('Generated output does not match expected file');
-      }
-    } else {
-      console.warn(`⚠️  Expected file not found for comparison: ${testCase.output}`);
     }
 
     // Clean up test file

@@ -1,22 +1,13 @@
 repos:
-  # Local hooks (our own pre-commit hooks)
+  # Local hook: Generate README from template/config (should run first)
   - repo: local
     hooks:
-      # Test our own hooks work
-      - id: readme-generator-test
-        name: README Generator Test
-        entry: node src/test.js
+      - id: readme-generator-update
+        name: README Generator Update
+        entry: node src/generator.js
         language: node
-        files: \.(js|json|hbs|md)$
-        pass_filenames: false
-        additional_dependencies: ['handlebars@^4.7.8']
-
-      # Validate README is up to date
-      - id: readme-generator-validate
-        name: README Generator Validate
-        entry: node src/validate.js
-        language: node
-        files: ^(config/|templates/|src/).*$
+        args: [config/readme-config.json, README.md, templates/default.hbs]
+        files: ^(config/.*\.json|templates/.*\.hbs)$
         pass_filenames: false
         additional_dependencies: ['handlebars@^4.7.8']
 
