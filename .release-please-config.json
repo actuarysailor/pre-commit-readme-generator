@@ -1,4 +1,7 @@
 {
+  "extra-files": [
+    "README.md"
+  ],
   "packages": {
     ".": {
       "changelog-sections": [
