@@ -99,7 +99,7 @@
       "enabled": true,
       "installation_steps": [
         {
-          "command": "repos:\n     - repo: https://github.com/actuarysailor/pre-commit-readme-generator\n       rev: v1.0.0  # Use the ref you want to point at\n       hooks:\n         - id: readme-generator-test",
+          "command": "repos:\n     - repo: https://github.com/actuarysailor/pre-commit-readme-generator\n       rev: v0.0.0<!-- x-release-please-version -->\n       hooks:\n         - id: readme-generator-test",
           "language": "yaml",
           "text": "Add this to your `.pre-commit-config.yaml`:"
         },
