@@ -69,6 +69,10 @@ function generateReadme(configPath, outputPath, templatePath, opts = {}) {
   let readme = compiled(config);
   readme = stripTemplateComments(readme);
 
+  // Normalize line endings to LF and ensure a single newline at EOF
+  readme = readme.replace(/\r\n?/g, '\n');
+  readme = readme.replace(/\s*$/, '') + '\n';
+
   if (validateOnly) {
     let current = '';
     try {

@@ -88,10 +88,7 @@ See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -118,8 +115,6 @@ or services._
 <!-- USAGE EXAMPLES -->
 
 ## Usage
-
-
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 

@@ -92,7 +92,6 @@ This is a simple project that demonstrates the basic features of README generati
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
