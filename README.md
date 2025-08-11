@@ -147,7 +147,7 @@ or services._
    ```yaml
    repos:
      - repo: https://github.com/actuarysailor/pre-commit-readme-generator
-       rev: v1.0.0  # Use the ref you want to point at
+       rev: v0.0.0<!-- x-release-please-version -->
        hooks:
          - id: readme-generator-test
    ```

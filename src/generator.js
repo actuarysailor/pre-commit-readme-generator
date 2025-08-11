@@ -46,7 +46,6 @@ function printUsageAndExit() {
 function generateReadme(configPath, outputPath, templatePath, opts = {}) {
   const debug = opts.debug || false;
   const validateOnly = opts.validateOnly || false;
-  const rootDir = process.cwd();
 
   let config;
   try {
@@ -104,7 +103,7 @@ function generateReadme(configPath, outputPath, templatePath, opts = {}) {
   console.log(`🧹 Stripped template comments from output`);
 
   // Check for .markdownlint.json config file before running markdownlint
-  const lintConfigPath = `${rootDir}/.markdownlint.json`;
+  const lintConfigPath = './.markdownlint.json';
   if (fs.existsSync(lintConfigPath)) {
     console.log(`🔍 Found markdownlint config: ${lintConfigPath}`);
   } else {
@@ -115,10 +114,12 @@ function generateReadme(configPath, outputPath, templatePath, opts = {}) {
   try {
     const { execSync } = require('child_process');
     const lintCmd = `npx markdownlint-cli2 fix "${outputPath}" --config .markdownlint.json`;
-    execSync(lintCmd, { stdio: 'inherit', cwd: rootDir });
+    execSync(lintCmd, { stdio: 'inherit', cwd: process.cwd() });
     console.log(`🧹 Ran markdownlint --fix on: ${outputPath}`);
   } catch (lintError) {
-    console.warn('⚠️  markdownlint --fix failed or is not installed. Skipping linting.');
+    if (lintError.code === 'ENOENT') {
+      console.warn('⚠️  markdownlint-cli2 is not installed. Skipping linting.');
+    } // else: markdownlint ran but found errors, so do not print a misleading warning
   }
 }
 

@@ -14,7 +14,9 @@ permissions:
 jobs:
   release-please:
     runs-on: ubuntu-latest
-    environment: release
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
       # Release Please bot: creates release PRs and tags, manages changelog and versioning
       - uses: googleapis/release-please-action@v4.2.0
@@ -25,16 +27,18 @@ jobs:
           manifest-file: .release-please-manifest.json
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      # The logic below will be executed only when a release is created
-
+  publish:
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_created == 'true' }}
+    runs-on: ubuntu-latest
+    environment: release
+    steps:
       # Check out the code at the release commit
       - uses: actions/checkout@v4
-        if: ${{ steps.release.outputs.release_created }}
 
       # Set up Node.js with npm cache for faster installs
       - name: Use Node.js 20.x
         uses: actions/setup-node@v4
-        if: ${{ steps.release.outputs.release_created }}
         with:
           node-version: 20.x
           cache: 'npm'
@@ -43,29 +47,24 @@ jobs:
       # Install dependencies from package-lock.json for reproducible builds
       - name: Install dependencies
         run: npm ci
-        if: ${{ steps.release.outputs.release_created }}
 
       # Generate README and any other templated files
       # This ensures the published package always has up-to-date generated content
       - name: Generate README and templates
         run: npm run generate
-        if: ${{ steps.release.outputs.release_created }}
 
       # Validate that generated files are current and committed
       # Fails if README or other generated files are out of sync, preventing accidental stale publishes
       - name: Validate generated files
         run: npm run validate
-        if: ${{ steps.release.outputs.release_created }}
 
       # Run all tests (unit and integration) to ensure package correctness before publishing
       - name: Run tests
         run: npm test
-        if: ${{ steps.release.outputs.release_created }}
 
       # Publish to npm registry only if all previous steps succeed
       # This guarantees only validated, tested, and up-to-date packages are published
       - name: Publish to npm
         run: npm publish
-        if: ${{ steps.release.outputs.release_created }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
