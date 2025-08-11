@@ -151,9 +151,7 @@ or services._
 
    ```sh
    git clone https://github.com/enterprise-corp/api-platform.git
-
 cd api-platform
-
    ```
 
 2. Copy environment configuration
@@ -166,10 +164,8 @@ cd api-platform
 
    ```sh
    docker-compose up -d postgres redis
-
 echo "Waiting for services to be ready..."
 sleep 10
-
    ```
 
 4. Install dependencies

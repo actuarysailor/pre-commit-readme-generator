@@ -94,6 +94,7 @@ This is a simple project that demonstrates the basic features of README generati
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
@@ -167,7 +168,6 @@ create a pull request. You can also simply open an issue with the tag
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->

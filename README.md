@@ -38,9 +38,8 @@ See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 
 <div align="center">
   <p align="center">
-    A pre-commit hook for validating and generating README files from Handlebars
-templates and JSON configurations. Ensures README.md stays in sync with template
-changes.
+    A pre-commit hook set for generating and validating README files from Handlebars templates and JSON configurations. Ensures README.md stays in sync with template changes.
+Use the update hook to generate, and the validate hook to ensure no uncommitted changes.
     <br />
     <a href="https://github.com/actuarysailor/pre-commit-readme-generator">
       <strong>Explore the docs »</strong>
@@ -188,33 +187,33 @@ or services._
 
 ## Usage
 
-Add the hook to your `.pre-commit-config.yaml`:
+Add the hooks to your `.pre-commit-config.yaml` in this order (generate first, validate last):
 
 ```yaml
 repos:
   - repo: https://github.com/actuarysailor/pre-commit-readme-generator
     rev: v1.0.0  # Use the ref you want to point at
     hooks:
-      - id: readme-generator-test
+      - id: readme-generator-update   # Generates/updates README.md from template/config
+      # ... other hooks (linters, formatters, etc.) ...
+      - id: readme-generator-validate # Fails if README.md (or any file) has uncommitted changes
 ```
 
 ### Available Hooks
 
-- **`readme-generator-test`**: Validates that your `README.md` matches the
-output generated from your template and configuration
-- **`readme-generator-update`**: Automatically updates your `README.md` when
-template or config files change
+- **`readme-generator-update`**: Generates or updates your `README.md` from the template and configuration
+- **`readme-generator-validate`**: Fails if `README.md` (or any file) has uncommitted changes (does not generate or update)
+- **`file-validate-no-diff`**: General-purpose file validation for any file(s)
 
 ### Repository Structure
 
 Your repository should have:
 
 - `BLANK_README.md` - Handlebars template
-- `configs/example.json` - Configuration file  
+- `configs/example.json` - Configuration file
 - `README.md` - Generated output
 
-The hook will validate that `README.md` matches what would be generated from the
-template and config.
+The update hook will generate or update `README.md` from the template and config. The validate hook will ensure it is committed and unchanged after all other hooks run.
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
