@@ -38,8 +38,6 @@
     "lint": "npx markdownlint-cli2 '**/*.md' '#node_modules'",
     "lint:fix": "npx markdownlint-cli2-fix '**/*.md' '#node_modules'",
     "postversion": "npm run generate",
-    "prepack": "node scripts/skip-in-ci.js || npm run validate",
-    "prepare": "node scripts/skip-in-ci.js || npm run generate",
     "test": "node src/test.js && npm run test:integration",
     "test:integration": "node scripts/test-integration.js",
     "test:unit": "node src/test.js",
