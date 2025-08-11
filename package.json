@@ -1,0 +1,47 @@
+{
+  "author": "actuarysailor",
+  "bin": {
+    "readme-generator": "src/generator.js",
+    "readme-generator-test": "src/test.js"
+  },
+  "bugs": {
+    "url": "https://github.com/actuarysailor/pre-commit-readme-generator/issues"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.8"
+  },
+  "description": "Pre-commit hooks for README template validation and generation",
+  "devDependencies": {
+    "markdownlint-cli2": "^0.18.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "homepage": "https://github.com/actuarysailor/pre-commit-readme-generator#readme",
+  "keywords": [
+    "pre-commit",
+    "readme",
+    "template",
+    "handlebars",
+    "documentation",
+    "validation"
+  ],
+  "license": "MIT",
+  "main": "src/generator.js",
+  "name": "pre-commit-readme-generator",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/actuarysailor/pre-commit-readme-generator.git"
+  },
+  "scripts": {
+    "generate": "node src/generator.js config/readme-config.json README.md templates/default.hbs",
+    "lint": "npx markdownlint-cli2 '**/*.md' '#node_modules'",
+    "lint:fix": "npx markdownlint-cli2-fix '**/*.md' '#node_modules'",
+    "postversion": "npm run generate",
+    "test": "node src/test.js && npm run test:integration",
+    "test:integration": "node scripts/test-integration.js",
+    "test:unit": "node src/test.js",
+    "validate": "npm run generate && git diff --exit-code README.md"
+  },
+  "version": "1.0.0"
+}

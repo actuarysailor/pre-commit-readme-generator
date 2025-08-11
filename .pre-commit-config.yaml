@@ -1,0 +1,64 @@
+repos:
+  # Local hook: Generate README from template/config (should run first)
+  - repo: local
+    hooks:
+      - id: readme-generator-update
+        name: README Generator Update
+        entry: node src/generator.js
+        language: node
+        args: [config/readme-config.json, README.md, templates/default.hbs]
+        files: ^(config/.*\.json|templates/.*\.hbs)$
+        pass_filenames: false
+        additional_dependencies: ['handlebars@^4.7.8']
+
+  # Markdown linting and formatting
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.45.0
+    hooks:
+      - id: markdownlint
+        args: ['--fix']
+        exclude: '^CHANGELOG\.md$|examples/test-integration-.*'
+
+  # JSON formatting
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: pretty-format-json
+        args: ['--autofix', '--indent=2']
+        files: \.(json)$
+      - id: check-json
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: check-merge-conflict
+
+  # Node.js specific
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: v9.33.0
+    hooks:
+      - id: eslint
+        files: \.(js)$
+        additional_dependencies:
+          - eslint@^8.0.0
+
+  # Security checks
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        args: ['--baseline', '.secrets.baseline']
+
+ci:
+  autofix_commit_msg: |
+    style: auto fixes from pre-commit.ci hooks
+
+    Applied automatic formatting and linting fixes.
+
+    For more information, see https://pre-commit.ci
+  autofix_prs: true
+  autoupdate_branch: ''
+  autoupdate_commit_msg: 'chore(deps): update pre-commit hooks'
+  autoupdate_schedule: weekly
+  skip: []
+  submodules: false

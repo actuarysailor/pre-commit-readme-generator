@@ -1,0 +1,194 @@
+{
+  "badges": {
+    "contributors": true,
+    "forks": true,
+    "issues": true,
+    "license": true,
+    "stars": true
+  },
+  "contact": {
+    "email": "platform-team@enterprise.com",
+    "name": "Platform Team",
+    "socials": [
+      {
+        "enabled": true,
+        "icon": "\ud83d\udcbc",
+        "platform": "LinkedIn",
+        "url": "https://linkedin.com/company/enterprise-corp",
+        "username": "enterprise-corp"
+      },
+      {
+        "enabled": true,
+        "icon": "\ud83d\udc26",
+        "platform": "Twitter",
+        "url": "https://twitter.com/enterprise_dev",
+        "username": "enterprise_dev"
+      },
+      {
+        "enabled": true,
+        "icon": "\ud83d\udcac",
+        "platform": "Slack",
+        "url": "https://enterprise-corp.slack.com/channels/platform",
+        "username": "enterprise-devs"
+      }
+    ]
+  },
+  "project": {
+    "description": "A comprehensive REST API platform built with modern technologies for enterprise-scale applications.",
+    "logo_path": "docs/assets/logo.svg",
+    "screenshot_path": "docs/assets/dashboard-screenshot.png",
+    "title": "Enterprise API Platform"
+  },
+  "repository": {
+    "github_username": "enterprise-corp",
+    "license": "Apache License 2.0",
+    "license_file": "LICENSE",
+    "repo_name": "api-platform"
+  },
+  "sections": {
+    "about": {
+      "content": "The Enterprise API Platform provides a robust, scalable foundation for building and managing REST APIs across your organization. It includes authentication, rate limiting, monitoring, and comprehensive documentation tools.",
+      "enabled": true
+    },
+    "acknowledgments": {
+      "enabled": true,
+      "items": [
+        {
+          "name": "Express.js Team",
+          "url": "https://expressjs.com/"
+        },
+        {
+          "name": "PostgreSQL Community",
+          "url": "https://postgresql.org/"
+        },
+        {
+          "name": "Docker Inc.",
+          "url": "https://docker.com/"
+        }
+      ]
+    },
+    "built_with": {
+      "enabled": true,
+      "frameworks": [
+        {
+          "badge": "https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white",
+          "name": "Node.js",
+          "url": "https://nodejs.org/"
+        },
+        {
+          "badge": "https://img.shields.io/badge/Express.js-404D59?style=for-the-badge",
+          "name": "Express",
+          "url": "https://expressjs.com/"
+        },
+        {
+          "badge": "https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white",
+          "name": "PostgreSQL",
+          "url": "https://postgresql.org/"
+        },
+        {
+          "badge": "https://img.shields.io/badge/redis-CC0000.svg?&style=for-the-badge&logo=redis&logoColor=white",
+          "name": "Redis",
+          "url": "https://redis.io/"
+        },
+        {
+          "badge": "https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white",
+          "name": "Docker",
+          "url": "https://docker.com/"
+        }
+      ]
+    },
+    "contact": {
+      "enabled": true
+    },
+    "contributing": {
+      "enabled": true,
+      "show_contributors": true
+    },
+    "getting_started": {
+      "enabled": true,
+      "installation_steps": [
+        {
+          "command": "git clone https://github.com/enterprise-corp/api-platform.git\ncd api-platform",
+          "text": "Clone the repository"
+        },
+        {
+          "command": "cp .env.example .env",
+          "language": "bash",
+          "text": "Copy environment configuration"
+        },
+        {
+          "command": "docker-compose up -d postgres redis\necho \"Waiting for services to be ready...\"\nsleep 10",
+          "text": "Start services with Docker Compose"
+        },
+        {
+          "command": "npm install",
+          "text": "Install dependencies"
+        },
+        {
+          "command": "npm run migrate",
+          "text": "Run database migrations"
+        },
+        {
+          "command": "npm run dev",
+          "text": "Start the development server"
+        }
+      ],
+      "prerequisites": [
+        {
+          "command": "docker --version && docker-compose --version",
+          "name": "Docker & Docker Compose"
+        },
+        {
+          "command": "node --version",
+          "name": "Node.js 18+"
+        },
+        {
+          "command": "psql --version",
+          "name": "PostgreSQL 14+"
+        }
+      ]
+    },
+    "license": {
+      "enabled": true
+    },
+    "roadmap": {
+      "enabled": true,
+      "items": [
+        {
+          "completed": true,
+          "text": "API Gateway Integration"
+        },
+        {
+          "completed": true,
+          "text": "Advanced Analytics Dashboard"
+        },
+        {
+          "completed": false,
+          "subitems": [
+            {
+              "completed": false,
+              "text": "Tenant isolation"
+            },
+            {
+              "completed": false,
+              "text": "Custom branding per tenant"
+            }
+          ],
+          "text": "Multi-tenant Support"
+        },
+        {
+          "completed": false,
+          "text": "GraphQL Support"
+        },
+        {
+          "completed": false,
+          "text": "Kubernetes Deployment Templates"
+        }
+      ]
+    },
+    "usage": {
+      "content": "### Quick Start\n\n```bash\n# Start the API server\nnpm run dev\n\n# Run tests\nnpm test\n\n# Generate API documentation\nnpm run docs\n```\n\n### API Endpoints\n\nThe platform exposes several endpoints:\n\n- `GET /api/v1/health` - Health check endpoint\n- `POST /api/v1/auth/login` - Authentication\n- `GET /api/v1/users` - User management\n- `POST /api/v1/data` - Data ingestion\n\n### Configuration\n\nSee `docs/CONFIGURATION.md` for detailed configuration options.",
+      "enabled": true
+    }
+  }
+}

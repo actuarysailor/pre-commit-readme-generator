@@ -1,0 +1,19 @@
+ - id: readme-generator-update
+   name: README Generator Update
+   description: Updates README.md from template configuration
+   entry: readme-generator
+   language: node
+   args: [config/readme-config.json, README.md, templates/default.hbs]
+   files: '.*'
+   require_serial: true
+   pass_filenames: false
+
+ - id: readme-generator-dry-validate
+   name: README Generator Dry Validate
+   description: Fails if README.md would change from template/config (does not generate or update)
+   entry: readme-generator
+   language: node
+   args: [--validate-only, config/readme-config.json, README.md, templates/default.hbs]
+   files: '.*'
+   require_serial: true
+   pass_filenames: false

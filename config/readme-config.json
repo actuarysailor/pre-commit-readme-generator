@@ -1,0 +1,222 @@
+{
+  "badges": {
+    "contributors": true,
+    "forks": true,
+    "issues": true,
+    "license": true,
+    "stars": true
+  },
+  "contact": {
+    "email": "your.email@example.com",
+    "name": "your-display-name-or-handle",
+    "socials": [
+      {
+        "enabled": false,
+        "icon": "\ud83d\udcbc",
+        "platform": "LinkedIn",
+        "url": "https://linkedin.com/in/your-linkedin",
+        "username": "your-linkedin"
+      },
+      {
+        "enabled": false,
+        "icon": "\ud83d\udc26",
+        "platform": "Twitter",
+        "url": "https://twitter.com/your-twitter",
+        "username": "your-twitter"
+      }
+    ]
+  },
+  "project": {
+    "description": "A pre-commit hook set for generating and validating README files from Handlebars templates and JSON configurations. Ensures README.md stays in sync with template changes.\nUse the update hook to generate, and the validate hook to ensure no uncommitted changes.",
+    "logo_path": "images/logo.svg",
+    "screenshot_path": "images/screenshot.svg",
+    "title": "Pre-commit README Generator"
+  },
+  "repository": {
+    "github_username": "actuarysailor",
+    "license": "MIT License",
+    "license_file": "LICENSE",
+    "repo_name": "pre-commit-readme-generator"
+  },
+  "sections": {
+    "about": {
+      "content": "This pre-commit hook helps maintain consistent README files by validating that\nyour README.md matches the output generated from your Handlebars template and\nJSON configuration. It ensures documentation stays up-to-date automatically.",
+      "enabled": true
+    },
+    "acknowledgments": {
+      "enabled": true,
+      "items": [
+        {
+          "name": "Best-README-Template",
+          "url": "https://github.com/othneildrew/Best-README-Template"
+        },
+        {
+          "name": "Handlebars.js",
+          "url": "https://handlebarsjs.com/"
+        },
+        {
+          "name": "Pre-commit Framework",
+          "url": "https://pre-commit.com/"
+        },
+        {
+          "name": "Choose an Open Source License",
+          "url": "https://choosealicense.com"
+        },
+        {
+          "name": "GitHub Pages",
+          "url": "https://pages.github.com"
+        }
+      ]
+    },
+    "built_with": {
+      "enabled": true,
+      "frameworks": [
+        {
+          "badge": "https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white",
+          "name": "Node.js",
+          "url": "https://nodejs.org/"
+        },
+        {
+          "badge": "https://img.shields.io/badge/Handlebars-f0772b?style=for-the-badge&logo=handlebarsdotjs&logoColor=white",
+          "name": "Handlebars",
+          "url": "https://handlebarsjs.com/"
+        },
+        {
+          "badge": "https://img.shields.io/badge/pre--commit-FAB040?style=for-the-badge&logo=pre-commit&logoColor=black",
+          "name": "Pre-commit",
+          "url": "https://pre-commit.com/"
+        }
+      ]
+    },
+    "contact": {
+      "enabled": true
+    },
+    "contributing": {
+      "enabled": true,
+      "show_contributors": true
+    },
+    "getting_started": {
+      "enabled": true,
+      "installation_steps": [
+        {
+          "command": "repos:\n     - repo: https://github.com/actuarysailor/pre-commit-readme-generator\n       rev: v0.0.0<!-- x-release-please-version -->\n       hooks:\n         - id: readme-generator-test",
+          "language": "yaml",
+          "text": "Add this to your `.pre-commit-config.yaml`:"
+        },
+        {
+          "command": "git clone https://github.com/actuarysailor/pre-commit-readme-generator.git",
+          "text": "Clone the repo (if contributing)"
+        },
+        {
+          "command": "npm install",
+          "text": "Install NPM packages"
+        },
+        {
+          "command": "{\n     \"project\": {\n       \"title\": \"Your Project Name\",\n       \"description\": \"Your project description\"\n     }\n   }",
+          "language": "json",
+          "text": "Create your configuration file"
+        },
+        {
+          "command": "node src/generator.js your-config.json README.md templates/default.hbs",
+          "text": "Generate your README"
+        }
+      ],
+      "prerequisites": [
+        {
+          "command": "npm install npm@latest -g",
+          "name": "Node.js"
+        },
+        {
+          "command": "npm install -g pre-commit",
+          "name": "Pre-commit"
+        }
+      ]
+    },
+    "license": {
+      "enabled": true
+    },
+    "roadmap": {
+      "enabled": true,
+      "items": [
+        {
+          "completed": false,
+          "subitems": [
+            {
+              "completed": false,
+              "text": "Mustache templates"
+            },
+            {
+              "completed": false,
+              "text": "Liquid templates"
+            }
+          ],
+          "text": "Add support for multiple template formats"
+        },
+        {
+          "completed": false,
+          "text": "Enhanced validation options"
+        },
+        {
+          "completed": false,
+          "text": "Custom helper functions"
+        },
+        {
+          "completed": true,
+          "text": "Automated releases and changelog generation"
+        },
+        {
+          "completed": false,
+          "text": "Multi-language documentation support"
+        },
+        {
+          "completed": false,
+          "subitems": [
+            {
+              "completed": false,
+              "text": "Terraform/OpenTofu resource documentation"
+            },
+            {
+              "completed": false,
+              "text": "API endpoint documentation from code"
+            },
+            {
+              "completed": false,
+              "text": "Function/method signature extraction"
+            },
+            {
+              "completed": false,
+              "text": "Dependency analysis and documentation"
+            },
+            {
+              "completed": false,
+              "text": "Output schema documentation"
+            }
+          ],
+          "text": "Automatic code documentation extraction"
+        },
+        {
+          "completed": false,
+          "subitems": [
+            {
+              "completed": false,
+              "text": "Docker image documentation"
+            },
+            {
+              "completed": false,
+              "text": "GitHub Actions workflow documentation"
+            },
+            {
+              "completed": false,
+              "text": "Database schema documentation"
+            }
+          ],
+          "text": "Advanced integrations"
+        }
+      ]
+    },
+    "usage": {
+      "content": "Add the hooks to your `.pre-commit-config.yaml` in this order (generate first, validate last):\n\n```yaml\nrepos:\n  - repo: https://github.com/actuarysailor/pre-commit-readme-generator\n    rev: v1.0.0  # Use the ref you want to point at\n    hooks:\n      - id: readme-generator-update   # Generates/updates README.md from template/config\n      # ... other hooks (linters, formatters, etc.) ...\n      - id: readme-generator-validate # Fails if README.md (or any file) has uncommitted changes\n```\n\n### Available Hooks\n\n- **`readme-generator-update`**: Generates or updates your `README.md` from the template and configuration\n- **`readme-generator-validate`**: Fails if `README.md` (or any file) has uncommitted changes (does not generate or update)\n- **`file-validate-no-diff`**: General-purpose file validation for any file(s)\n\n### Repository Structure\n\nYour repository should have:\n\n- `BLANK_README.md` - Handlebars template\n- `configs/example.json` - Configuration file\n- `README.md` - Generated output\n\nThe update hook will generate or update `README.md` from the template and config. The validate hook will ensure it is committed and unchanged after all other hooks run.",
+      "enabled": true
+    }
+  }
+}

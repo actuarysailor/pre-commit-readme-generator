@@ -1,0 +1,38 @@
+{
+  "extra-files": [
+    "README.md"
+  ],
+  "packages": {
+    ".": {
+      "changelog-sections": [
+        {
+          "section": "Features",
+          "type": "feat"
+        },
+        {
+          "section": "Bug Fixes",
+          "type": "fix"
+        },
+        {
+          "section": "Performance Improvements",
+          "type": "perf"
+        },
+        {
+          "section": "Documentation",
+          "type": "docs"
+        },
+        {
+          "section": "Dependencies",
+          "type": "deps"
+        },
+        {
+          "hidden": true,
+          "section": "Miscellaneous",
+          "type": "chore"
+        }
+      ],
+      "package-name": "pre-commit-readme-generator",
+      "release-type": "node"
+    }
+  }
+}
