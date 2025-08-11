@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.4](https://github.com/actuarysailor/pre-commit-readme-generator/compare/v1.1.3...v1.1.4) (2025-08-11)
+
+
+### Bug Fixes
+
+* remove prepare/prepack scripts ([8c72e4a](https://github.com/actuarysailor/pre-commit-readme-generator/commit/8c72e4a82c183ac9331f15c3a6f84c6673c0d850))
+* remove prepare/prepack scripts and improve release workflow for cross-platform compatibility ([b181bbf](https://github.com/actuarysailor/pre-commit-readme-generator/commit/b181bbff4710e62d6a81ecc6c191e9997b1d1c95))
+
 ## [1.1.3](https://github.com/actuarysailor/pre-commit-readme-generator/compare/v1.1.2...v1.1.3) (2025-08-10)
 
 
