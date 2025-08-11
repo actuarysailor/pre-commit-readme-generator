@@ -22,7 +22,7 @@ repos:
 
   # Markdown linting and formatting
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.37.0
+    rev: v0.45.0
     hooks:
       - id: markdownlint
         args: ['--fix']
@@ -30,7 +30,7 @@ repos:
 
   # JSON formatting
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v6.0.0
     hooks:
       - id: pretty-format-json
         args: ['--autofix', '--indent=2']
@@ -44,7 +44,7 @@ repos:
 
   # Node.js specific
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v8.50.0
+    rev: v9.33.0
     hooks:
       - id: eslint
         files: \.(js)$
@@ -53,7 +53,7 @@ repos:
 
   # Security checks
   - repo: https://github.com/Yelp/detect-secrets
-    rev: v1.4.0
+    rev: v1.5.0
     hooks:
       - id: detect-secrets
         args: ['--baseline', '.secrets.baseline']
