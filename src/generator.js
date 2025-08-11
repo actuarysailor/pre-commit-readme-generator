@@ -102,7 +102,7 @@ function generateReadme(configPath, outputPath, templatePath, opts = {}) {
   console.log(`📋 Used template: ${templatePath}`);
   console.log(`🧹 Stripped template comments from output`);
 
-  // Check forlintConfigPath .markdownlint.json config file before running markdownlint
+  // Check for .markdownlint.json config file before running markdownlint
   const lintConfigPath = './.markdownlint.json';
   if (fs.existsSync(lintConfigPath)) {
     console.log(`🔍 Found markdownlint config: ${lintConfigPath}`);
