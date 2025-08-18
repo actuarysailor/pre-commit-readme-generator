@@ -34,7 +34,7 @@ jobs:
     environment: release
     steps:
       # Check out the code at the release commit
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       # Set up Node.js with npm cache for faster installs
       - name: Use Node.js 20.x
