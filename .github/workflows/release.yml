@@ -19,7 +19,7 @@ jobs:
       tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
       # Release Please bot: creates release PRs and tags, manages changelog and versioning
-      - uses: googleapis/release-please-action@v4.2.0
+      - uses: googleapis/release-please-action@v4.3.0
         id: release
         with:
           release-type: node
