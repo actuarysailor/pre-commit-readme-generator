@@ -287,7 +287,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Contact
 
 | | |
-|:---:|:---|
+| :---: | :--- |
 | <img src="https://github.com/actuarysailor.png" alt="your-display-name-or-handle" width="50" height="50" style="border-radius: 50%;"> | **your-display-name-or-handle** |
 | 📧 | [your.email@example.com](mailto:your.email@example.com) |
 | 🐙 | [@actuarysailor](https://github.com/actuarysailor) |
